@@ -1,0 +1,16 @@
+<script>
+function handleAddToCartSuccessEvent(event) {
+    if (typeof window.upcartRegisterAddToCart === "function") {
+        window.upcartRegisterAddToCart();
+        window.upcartOpenOnAddToCartOverride = true; 
+    } else {
+        console.warn("[UpCart] API is not available on this page.");
+    }
+}
+document.addEventListener("loopPresetAddToCartSuccessEvent", (event) => {
+    handleAddToCartSuccessEvent(event);
+});
+document.dispatchEvent(new CustomEvent("loopPresetAddToCartSuccessEvent", {
+    detail: { message: "Item successfully added to the cart!" }
+}));
+</script>
